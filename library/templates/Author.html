@@ -1,0 +1,92 @@
+{% include "header.html" %}
+{% if author %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ author.name }}{% endblock %}</title>
+</head>
+  <style>
+        #bImg
+        {
+            width: 300px;
+            height: 300px;
+        }
+        #content
+        {
+            width: 300px;
+            height: 800px;
+            margin-left: 10px;
+        }
+    </style>
+
+<body>
+
+<div id="libHeader">
+{{ libHeader  }}
+</div>
+
+<div class="profile_container container">
+    <div class="row">
+          <!-- left column -->
+          <div class="col-md-3">
+            <div class="text-center">
+
+                <div id="content">
+                {% block content %}
+
+                 {% load static %}
+                 <figure>
+                    <img id="bImg"src="../../{{pic}} " alt="My image"/>
+                    <fieldset>
+                     <h2>{{author.name}}</h2>
+                        <center><button id="follow" value={{followValue}}> follow </button></center>
+                  </fieldset>
+
+                </figure>
+
+                     <p> Bio :{{author.Bio }} </p>
+                     <p>from :{{author.country }}  </p>
+                     <p>Born_at :{{author.Born_at }}  </p>
+                     <p>Diad_at :{{author.Diad_at }}  </p>
+                    <p>Books :</p>
+                  {% for book in authorBooks %}<a href="/library/books/{{book}}">{{ book }} </a>{% endfor %}
+
+                {% endblock %}
+                </div>
+            </div>
+          </div>
+
+              <div class="col-md-3 ">
+
+            </div>
+            <div class="col-md-6 ">
+                <h2>Related Authors</h2>
+                    {% for rank in related_author %}
+                         {% if rank.name != author.name %}
+                            <div class="form-group">
+                                 <label class="col-lg-12 control-label">Author Name   : <a href="/library/authers/{{rank.name}}">{{rank.name}}</a></label>
+                                </div>
+                              <div class="form-group">
+                                 <label class="col-lg-12 control-label">Bio   : {{rank.Bio}}</label>
+                                </div>
+                              <div class="form-group">
+                                 <label class="col-lg-12 control-label">Country   : {{rank.country}}</label>
+                                </div>
+                         {% endif %}
+                    {% endfor %}
+            </div>
+
+    </div>
+</div>
+
+
+</body>
+
+<script src="{% static "library/javascript/jquery-3.1.1.js" %}"> </script>
+ <script src="{% static "library/javascript/fav.js" %}"> </script>
+</html>
+{% else %}
+    <p>No Author found.</p>
+{% endif %}

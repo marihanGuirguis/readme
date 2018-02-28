@@ -1,0 +1,175 @@
+
+{% include "header.html" %}
+{% if latest_category_list or wish_list or authors_list or books_list or top_author or top_rated%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Home{% endblock %}</title>
+
+</head>
+<style>
+    #container,#bookSlidShow{
+        width: 100%;
+    }
+    .carousel-item
+    {
+        width: 100%;
+    }
+    .carousel-item img
+    {
+        width: 100%;
+    }
+    .carousel-caption h3,a,p
+    {
+        text-align: center;
+        font-size: 18px;
+        color: #ffffff;
+    }
+    .home
+    {
+        background:url("../static/style/cover2.jpeg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+</style>
+<body class="home">
+
+<div id="bookSlidShow">
+    {% block bookSlidShow %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-4">
+
+        <div id="carouselExampleIndicators caro" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+
+                    <figure>
+                        <img class="img d-block w-100" src="../../static/library/au.jpg" alt="First slide">
+                        <figcaption>
+                           <center>
+                                <h3>Author</h3>
+                        <p>Top 5 Author</p>
+                           </center>
+                        </figcaption>
+                    </figure>
+                </div>
+              <!--<p>{{top_author}}</p>-->
+              {% for rank in  top_author %}
+                <div class="carousel-item">
+                    <figure>
+                        <img class="img d-block w-100" src={{rank.pic}} alt="First slide">
+                        <figcaption>
+                            <center>
+
+                             <h3>Rate:{{rank.count}}</h3>
+                        <a href="authers/{{rank.name}}">{{rank.name}}</a>
+                            </center>
+                        </figcaption>
+                    </figure>
+
+
+                </div>
+              {% endfor %}
+          </div>
+        </div>
+
+        </div>
+
+
+        <br>
+          <div class="col-md-4">
+
+        <div id="carouselExampleIndicators1 caro" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <figure>
+                  <img class="img d-block w-100" src="../../static/library/au.jpg" alt="First slide">
+                  <figcaption>
+                      <center>
+                        <h3>Book</h3>
+                        <p>Top 5 Books</p>
+                      </center>
+                  </figcaption>
+                  </figure>
+                </div>
+              <!--<p>{{top_author}}</p>-->
+              {% for rank in  top_rated %}
+                <div class="carousel-item">
+                    <figure>
+                    <img class="img d-block w-100" src={{rank.pic}} alt="First slide">
+                        <figcaption>
+                            <center>
+                                <h3>Rate: {{rank.rateAVG}}</h3>
+                        <a href="books/{{rank.name}}">{{rank.name}}</a>
+                        <p>Total: {{ rank.countRaters}}</p>
+                            </center>
+                        </figcaption>
+                    </figure>
+                </div>
+              {% endfor %}
+          </div>
+
+
+          </div>
+        </div>
+
+    <br>
+
+      <div class="col-md-4">
+
+    <div id="carouselExampleIndicators2 caro" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+
+                    <figure>
+                        <img class="img d-block w-100" src="../../static/library/au.jpg" alt="First slide">
+                        <figcaption>
+                            <center>
+                                <h3>Wish List</h3>
+                            </center>
+                        </figcaption>
+                    </figure>
+                </div>
+              <!--<p>{{top_author}}</p>-->
+              {% for rank in  wish_list %}
+                <div class="carousel-item">
+
+                    <figure>
+                        <img class="img d-block w-100" src={{rank.pic}} alt="First slide">
+                        <figcaption>
+                            <center>
+                                <a href="books/{{rank.name}}">{{rank.name}}</a>
+                        <p>{{rank.description}}</p>
+                            </center>
+                        </figcaption>
+                    </figure>
+                </div>
+              {% endfor %}
+
+
+</div>
+          </div>
+        </div>
+
+    {% endblock %}
+</div>
+    </div>
+
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+
+</body>
+</html>
+{% else %}
+
+    <title>Home</title>
+
+{% endif %}

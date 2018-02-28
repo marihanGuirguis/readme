@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/main.css'%}">
+   <style>
+       .login
+    {
+        background:url("../../static/style/book5.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+   </style>
+</head>
+<body class="login">
+
+
+  <h1 class="hform">Login</h1>
+  <form class="login_form" method="post">
+<table>
+       {% csrf_token %}
+       {{ form.as_p }}
+
+
+       <!--<tr>-->
+    <div id="btns">
+            <button id="btn_form1" class="btn_form1 btn btn-warning btn-lg" type="submit">Login</button>
+            <button id="btn_form2" class="btn_form2 btn btn-warning btn-lg" onclick="redirect()">sign up</button>
+        </div>
+       <!--</tr>-->
+   </table>
+  </form>
+
+
+
+<script>
+    function redirect() {
+        window.location="signup";
+    }
+</script>
+</body>
+</html>

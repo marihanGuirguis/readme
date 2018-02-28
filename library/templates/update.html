@@ -1,0 +1,172 @@
+{% include "header.html" %}
+
+{% block content %}
+<style>
+  .nav-form
+{
+    margin-right: 100px;
+}
+
+.logo
+{
+    width: 60px;
+    height: 60px;
+}
+#bookSlidShow
+{
+    width: 200px;
+    height: 200px;
+}
+
+.img
+{
+    width:200px !important;
+    height:200px !important;
+
+}
+
+.carousel-caption p,h3
+{
+    color: #014c8c;
+}
+/* Start Login Page CSS*/
+.login
+{
+    background: url(cover1.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.hform
+{
+    font-weight: bold;
+    font-size: 50px;
+    color: #ffffff;
+    margin-top: 200px;
+    margin-left: 600px;
+    font-family: "Bitstream Vera Sans";
+    color: #FCA205;
+
+}
+.login_form
+{
+    padding-left: 430px;
+    font-weight: bold;
+    font-family: "Bitstream Vera Sans";
+    color: #FCA205;
+    font-size: 24px;
+}
+.btn_form
+{
+    margin-left: 200px;
+}
+
+/*End Login Page CSS*/
+.navbar-brand
+{
+    color: #FCA205;
+    font-family: "-apple-system";
+}
+
+/*Start Signup page CSS*/
+.hdsite
+{
+    margin-left: 550px;
+    color: #FCA205;
+    font-family: system-ui;
+    font-weight: bold;
+}
+
+.sign-up
+{
+    margin-left: 500px;
+    font-family: "Abyssinica SIL";
+    color: #FCA205;
+    font-weight: bold;
+}
+
+/*End Signup page CSS*/
+
+.home,
+.category,
+.profile,
+.search
+{
+     background: url(cover2.jpeg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.edit_profile
+{
+    color: #c12e2a;
+    font-weight: bold;
+    font-family: "Abyssinica SIL";
+}
+.profile_info
+{
+    color: #c12e2a;
+    font-family: "Abyssinica SIL";
+}
+.form_profile,
+
+h6
+{
+    color: #c12e2a;
+    font-family: "Abyssinica SIL";
+    font-size: 18px;
+
+}
+.profile_container
+{
+}
+
+</style>
+ <div class="profile_container container">
+    <h1 style="font-size: 23px" class="edit_profile">Edit Profile</h1>
+  	<hr>
+	<div class="row">
+      <!-- left column -->
+      <div class="col-md-5">
+        <div class="text-center">
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+            <br>
+          <h6>Upload a different photo...</h6>
+
+          <input class="form-control" type="file">
+        </div>
+      </div>
+     <!-- edit form column -->
+      <div class="col-md-7 personal-info">
+        <h3 class="profile_info">Personal info</h3>
+
+  <form method="post" class="form_profile form-horizontal" role="form" >
+    {% csrf_token %}
+    {% for field in form %}
+
+        {% if field.auto_id != 'id_password' %}
+              <div class="form-group">
+                 <label class="col-lg-12 control-label">{{ field.label_tag }}</label>
+              <div class="col-lg-12">
+                {{ field }}
+              </div>
+            </div>
+
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+
+    {% endfor %}
+
+    <a href="/library/updateUserPassword">Click Me To Change Password</a><br>
+    <button style="width: 42%" type="submit">Submit</button>
+  </form>
+      </div>
+    </div>
+ </div>
+{% endblock %}
+

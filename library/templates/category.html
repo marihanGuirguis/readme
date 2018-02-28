@@ -1,0 +1,198 @@
+{% include "header.html" %}
+{% if category %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{category.type}}{% endblock %}</title>
+    <style>
+        .nav-form
+{
+    margin-right: 100px;
+}
+
+.logo
+{
+    width: 60px;
+    height: 60px;
+}
+#bookSlidShow
+{
+    width: 200px;
+    height: 200px;
+}
+
+.img
+{
+    width:200px !important;
+    height:200px !important;
+
+}
+
+.carousel-caption p,h3
+{
+    color: #014c8c;
+}
+/* Start Login Page CSS*/
+.login
+{
+    background: url(cover1.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.hform
+{
+    font-weight: bold;
+    font-size: 50px;
+    color: #ffffff;
+    margin-top: 200px;
+    margin-left: 600px;
+    font-family: "Bitstream Vera Sans";
+    color: #FCA205;
+
+}
+.login_form
+{
+    padding-left: 430px;
+    font-weight: bold;
+    font-family: "Bitstream Vera Sans";
+    color: #FCA205;
+    font-size: 24px;
+}
+.btn_form
+{
+    margin-left: 200px;
+}
+
+/*End Login Page CSS*/
+.navbar-brand
+{
+    color: #FCA205;
+    font-family: "-apple-system";
+}
+
+/*Start Signup page CSS*/
+.hdsite
+{
+    margin-left: 550px;
+    color: #FCA205;
+    font-family: system-ui;
+    font-weight: bold;
+}
+
+.sign-up
+{
+    margin-left: 500px;
+    font-family: "Abyssinica SIL";
+    color: #FCA205;
+    font-weight: bold;
+}
+
+/*End Signup page CSS*/
+
+.home,
+.category,
+.profile,
+.search
+{
+     background: url(cover2.jpeg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.edit_profile
+{
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Abyssinica SIL";
+}
+.profile_info
+{
+    color: #c12e2a;
+    font-weight: bold;
+    font-family: "Abyssinica SIL";
+}
+.form_profile,
+h6
+{
+    color: #c12e2a;
+    font-weight: bold;
+    font-family: "Abyssinica SIL";
+    font-size: 22px;
+
+}
+.profile_container
+{
+    top: -150px;
+}
+
+.category_image
+{
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    margin-top: -150px;
+}
+.category_type
+{
+    font-weight: bold;
+    font-family: "Abyssinica SIL";
+    font-size: 30px;
+    color: #c12e2a;
+    margin-left: 130px;
+}
+.desc_cat
+{
+    font-weight: bold;
+    font-family: "Abyssinica SIL";
+    font-size: 24px;
+    color: #000000;
+}
+    </style>
+</head>
+<body class="category">
+
+<div id="content">
+{% block content %}
+
+ {% load static %}
+    <div class="container">
+        <div class="row">
+      <div class="col-md-6">
+          <figure>
+            <img class="category_image" src="../../{{pic}} " alt="My image"/>
+            <fieldset class="category_type">
+           {{category.type}}
+                <button id="categoryfollow" value={{followValue}}> favourite</button>
+             <p> Description:{{category.Description }} </p>
+            </fieldset>
+          </figure>
+      </div>
+      <div class="col-md-6 desc_cat">
+
+          <p>Books: </p>
+
+
+          {% for book in CatetegoryBooks %}
+          <div class="form-group">
+              <a href="/library/books/{{book}}">{{ book.name }}  </a>
+              <p>{{book.description}}</p>
+               </div>
+              {% endfor %}
+
+
+      </div>
+{% endblock %}
+
+</body>
+<script src="{% static "library/javascript/jquery-3.1.1.js" %}"> </script>
+ <script src="{% static "library/javascript/fav.js" %}"> </script>
+</html>
+{% else %}
+    <p>No Category is chosen.</p>
+{% endif %}

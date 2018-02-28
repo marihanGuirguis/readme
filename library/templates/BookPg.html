@@ -1,0 +1,108 @@
+{% include "header.html" %}
+
+<html>
+<head>
+    <title>{% block title %}{{bookData.name}}{% endblock %}</title>
+ <link rel="stylesheet" href="../../../../static/style/bookRate.css ">
+    <style>
+        #bImg
+        {
+            width: 300px;
+            height: 300px;
+        }
+        #content
+        {
+            width: 300px;
+            height: 800px;
+        }
+    </style>
+</head>
+
+ <body>
+
+ {% load static %}
+
+ <div class="profile_container container">
+    <div class="row">
+          <!-- left column -->
+          <div class="col-md-3">
+            <div class="text-center">
+               <div id="content">
+                 <figure>
+                <img id="bImg" src="../../{{pic}} " alt="My image"/>
+                    <fieldset>
+                   <p>{{bookData.name}}</p>
+                 <button id="fav" value={{favvalue}}> {{favvalueText}} </button>
+                   <button id="read" value={{readvalue}}> {{readvalueText}} </button>
+                   <button id="wishList" value={{wishListvalue}}> {{wishListvalueText}} </button>
+
+                     <form id="ratingsForm">
+                    <div class="stars" rate={{Ratevalue}}>
+                        <input type="radio" name="star" class="star-1" id="star-1" />
+                        <label class="star-1" for="star-1">1</label>
+                        <input type="radio" name="star" class="star-2" id="star-2" />
+                        <label class="star-2" for="star-2">2</label>
+                        <input type="radio" name="star" class="star-3" id="star-3" />
+                        <label class="star-3" for="star-3">3</label>
+                        <input type="radio" name="star" class="star-4" id="star-4" />
+                        <label class="star-4" for="star-4">4</label>
+                        <input type="radio" name="star" class="star-5" id="star-5" />
+                        <label class="star-5" for="star-5">5</label>
+
+                        <span></span>
+                    </div>
+                </form>
+
+                  </fieldset>
+
+                </figure>
+
+                 <p>  Author : {{bookData.author}} </p>
+                 <p> description :{{bookData.description }} </p>
+                 <p> published at : {{bookData.published_at}}</p>
+                 <p> Categories : {% for category in bookData.categories.all %}{{ category }}<br/>{% endfor %} </p>
+            </div>
+            </div>
+          </div>
+
+            <div class="col-md-3 ">
+
+            </div>
+            <div class="col-md-6 ">
+                <h2>Related Books</h2>
+                    {% for rank in related_books %}
+                         {% if rank.name != bookData.name %}
+                            <div class="form-group">
+                                 <label class="col-lg-12 control-label">Book Name   : <a href="/library/books/{{rank.name}}">{{rank.name}}</a></label>
+                                </div>
+                              <div class="form-group">
+                                 <label class="col-lg-12 control-label">Description   : {{rank.description}}</label>
+                                </div>
+                              <div class="form-group">
+                                 <label class="col-lg-12 control-label">Published at   : {{rank.published_at}}</label>
+                                </div>
+                                 <div class="form-group">
+                                 <label class="col-lg-12 control-label">Author   : {{rank.author}}</label>
+                                </div>
+                         {%endif%}
+                    {% endfor %}
+            </div>
+
+
+    </div>
+ </div>
+ </body>
+
+
+
+
+
+
+
+
+
+
+<script src="{% static "library/javascript/jquery-3.1.1.js" %}"> </script>
+ <script src="{% static "library/javascript/fav.js" %}"> </script>
+
+</html>

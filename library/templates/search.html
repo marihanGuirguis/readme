@@ -1,0 +1,105 @@
+
+{% include "header.html" %}
+{% if  author or book or category %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{by}}{% endblock %}</title>
+
+
+</head>
+
+<body class="search">
+
+
+<div id="libHeader">
+{{ libHeader }}
+</div>
+
+<div id="content">
+{% block content %}
+    <div class="profile_container container">
+    <h3 class="profile_info">Books:</h3><br>
+    {% for rank in  book %}
+            <div class="row">
+                <!-- left column -->
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img src={{rank.pic}} class="avatar img-circle" alt="avatar">
+                </div>
+              </div>
+              <div class="col-md-9 personal-info">
+                    <div class="form-group">
+                     <label class="col-lg-3 control-label">Book Name   : <a href="/library/books/{{rank.name}}">{{rank.name}}</a></label>
+                    </div>
+                  <div class="form-group">
+                     <label class="col-lg-3 control-label">Description   : {{rank.description}}</label>
+                    </div>
+                  <div class="form-group">
+                     <label class="col-lg-3 control-label">Published at   : {{rank.published_at}}</label>
+                    </div>
+              </div>
+        </div>
+         {% endfor %}
+<hr>
+            <h3 class="profile_info">Authors:</h3><br>
+    {% for rank in  author %}
+            <div class="row">
+                <!-- left column -->
+              <div class="col-md-3">
+                <div class="text-center">
+
+                  <img src={{rank.pic}} class="avatar img-circle" alt="avatar">
+                </div>
+              </div>
+              <div class="col-md-9 personal-info">
+                    <div class="form-group">
+                     <label class="col-lg-12 control-label">Author Name   : <a href="/library/authers/{{rank.name}}">{{ rank.name }}</a></label>
+                    </div>
+                  <div class="form-group">
+                     <label class="col-lg-12 control-label">Bio   : {{rank.Bio}}</label>
+                    </div>
+                  <div class="form-group">
+                     <label class="col-lg-12 control-label">Country   : {{rank.country}}</label>
+                    </div>
+              </div>
+        </div>
+         {% endfor %}
+
+        <hr>
+
+                    <h3 class="profile_info">Category:</h3><br>
+    {% for rank in  category %}
+            <div class="row">
+                <!-- left column -->
+              <div class="col-md-3">
+                <div class="text-center">
+                  <img src={{rank.pic}} class="avatar img-circle" alt="avatar">
+                </div>
+              </div>
+              <div class="col-md-9 personal-info">
+                    <div class="form-group">
+                     <label class="col-lg-3 control-label">Category type   : <a href="/library/{{rank.type}}">{{ rank.type }}</a></label>
+                    </div>
+                  <div class="form-group">
+                     <label class="col-lg-3 control-label">Description   : {{rank.Description}}</label>
+                    </div>
+              </div>
+        </div>
+         {% endfor %}
+
+    </div>
+
+{% endblock %}
+</div>
+
+</body>
+
+</html>
+{% else %}
+
+    <title>{{by}}</title>
+    <center><h2>{{by}} Not Found!!</h2></center>
+{% endif %}

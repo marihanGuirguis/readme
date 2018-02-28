@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+   {% load static %}
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style/main.css'%}">
+
+
+</head>
+
+<body>
+
+<div id="libHeader">
+{% block libHeader %}
+
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background-color: #333;">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" style="color: #FCA205;" href="/library/home">ReadMe</a>
+
+  <div class="collapse navbar-collapse" id="main_menu">
+      <select name="categories" id="categories" >
+        <option selected disabled>Categories</option>
+
+        {% for category in latest_category_list %}
+            <option value="{{ category.type }}">{{ category.type }}</option>
+        {% endfor %}
+
+    </select>
+   <select name="authers" id="authers" >
+        <option selected disabled>Your favourite authers</option>
+        {% for auther in authors_list %}
+
+            <option value="{{ auther.name }}">{{ auther.name }}</option>
+        {% endfor %}
+
+    </select>
+   <select name="books_list" id="books_list" >
+           <option selected disabled>Your favourite Books</option>
+
+        {% for book in books_list %}
+            <option value="{{ book.name }}">{{ book.name }}</option>
+        {% endfor %}
+
+    </select>
+    <button id="getAllAuthors" class="btn btn-outline-warning my-sm-0">Authors</button>
+    <form  class="nav-form form-inline my-2 my-lg-0 navbar-toggler-right">
+      <input id="textSearch" class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button id="submitSearch" class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <a href="/library/profile" class="navbar-toggler-right">{{ me.username }}</a>
+      <a href="{% url 'logout' %}">logout</a>
+  </div>
+</nav>
+{% endblock %}
+<div id="bookSlidShow">
+{% block bookSlidShow %}
+{% endblock %}
+</div>
+</div>
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'library/javascript/tether.min.js' %}"></script>
+<script src="{% static 'library/javascript/bootstrap.min.js' %}"></script>
+<script src="{% static 'library/javascript/app.js' %}"></script>
+</body>
+</html>
